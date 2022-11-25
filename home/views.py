@@ -1,5 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from home.models import Setting
+
 def index(request):
-    return render(request,'index.html')
+    setting=Setting.objects.get(pk=1)
+    context={'setting':setting}
+    return render(request,'index.html',context)
