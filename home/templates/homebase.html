@@ -3,7 +3,7 @@
 {% load static %}
 <head>
 
-     <title>Health - Medical Website Template</title>
+     <title>{%block title%} {%endblock%}</title>
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
      <meta name="description" content="">
@@ -19,15 +19,15 @@
 
      <!-- MAIN CSS -->
      <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
-
+     {%block head%}{%endblock%}
 </head>
 
 <body>
-{% block header %}{% endblock %}
-{% block sidebar %}{% endblock %}
-{%block slider%} {% endblock %}
-{% block content %}{%  endblock %}
-{% block footer %}{%  endblock %}
+     {% block header %}{% endblock %}
+     {% block sidebar %}{% endblock %}
+     {%block slider%} {% endblock %}
+     {% block content %}{%  endblock %}
+     {% block footer %}{%  endblock %}
 </body>
 
 </html>

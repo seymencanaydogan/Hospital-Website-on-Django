@@ -5,6 +5,8 @@ from django.forms import ModelForm
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 class Category(models.Model):
     STATUS = (
         ('True', 'Evet'),
@@ -33,7 +35,7 @@ class Policlinic(models.Model):
     description = models.CharField(blank=True, max_length=300)
     keywords = models.CharField(blank=True, max_length=200)
     image = models.ImageField(blank=True, upload_to='images/')
-    detail = models.TextField()
+    detail = RichTextUploadingField()
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
     parent = ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)

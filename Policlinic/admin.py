@@ -10,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ['status']
 
 class PoliclinicAdmin(admin.ModelAdmin):
-    list_display = ['title','category','status']
+    list_display = ['title','category','image','status']
     list_filter = ['status']
     inlines = [PoliclinicImageInline]
 
