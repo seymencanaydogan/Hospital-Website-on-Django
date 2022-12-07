@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Setting(models.Model):
     STATUS = (
@@ -21,10 +22,10 @@ class Setting(models.Model):
     facebook = models.CharField(blank=True, max_length=50)
     instagram = models.CharField(blank=True, max_length=50)
     twitter = models.CharField(blank=True, max_length=50)
-    aboutus = models.CharField(max_length=50)
-    contact = models.CharField(max_length=50)
+    aboutus = RichTextUploadingField()
+    contact = RichTextUploadingField()
     contact_map = models.CharField(max_length=50)
-    references = models.CharField(max_length=50)
+    references = RichTextUploadingField()
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
     uptade_at = models.DateTimeField(auto_now=True)
