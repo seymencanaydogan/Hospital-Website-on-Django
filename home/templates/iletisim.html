@@ -11,17 +11,52 @@
 {% block header %}{% include 'header.html'%}{% endblock %}
 {% block sidebar %}{% include "sidebar.html" %}{% endblock %}
 {% block content %}
-     <section id="news-detail" data-stellar-background-ratio="0.5">
+     <div class="section">
           <div class="container">
                <div class="row">
-
-                    <div class="col-md-8 col-sm-7">
-                         <div class="news-detail-thumb">
-                                    {{ setting.contact|safe}}  
+                    <div class="col-md-4">
+                         <div class="billing-details">
+                              <div class="section-title">
+                                   <h3 class="title">İletişim Formu</h3>
                               </div>
+
+                              {% if messages%}
+                                   {%for message in messages%}
+                                        <div class="alert alert-{{message.tags}}" role="alert">
+                                             {{message}}
+                                        </div>
+                                   {%endfor %}
+                              {% endif %}
+
+                              <form action="" method="post">
+                                   {%  csrf_token %}
+                                   {{form.as_p}}
+                                   <input type="submit" value="SEND FORM">
+                              </form>
+
                          </div>
-                    </div>               
+                    </div>
+                    <div class="col-md-8">
+                         <div class="section-title">
+                              <h3 class="title">İletişim Bilgilerimiz</h3>
+                    </div>
+                    <section id="news-detail" data-stellar-background-ratio="0.5">
+                         <div class="container">
+                              <div class="row">
+               
+                                   <div class="col-md-8 col-sm-7">
+                                        <div class="news-detail-thumb">
+                                                   {{ setting.contact|safe }}  
+                                             </div>
+                                        </div>
+                                   </div>               
+                         </div>
+                    </section>
+               </div>
           </div>
-     </section>
+     </div>
+
+
+ 
 {% endblock %}
 {% block footer %}{% include "footer.html" %}{% endblock %}
