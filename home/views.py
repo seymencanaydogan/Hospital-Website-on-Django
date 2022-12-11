@@ -3,10 +3,12 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from home.models import Setting, ContactFormu, ContactFormMessage
+from Policlinic.models import Policlinic
 
 def index(request):
     setting=Setting.objects.get(pk=1)
-    context={'setting':setting, 'page':'home'}
+    sliderdata=Policlinic.objects.all()[:3]
+    context={'setting':setting, 'page':'home','sliderdata':sliderdata}
     return render(request,'index.html',context)
 
 def hakkimizda(request):
