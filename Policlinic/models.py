@@ -7,7 +7,10 @@ from django.urls import reverse
 
 from ckeditor_uploader.fields import RichTextUploadingField
 
-class Category(models.Model):
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
+
+class Category(MPTTModel):
     STATUS = (
         ('True', 'Evet'),
         ('False', 'Hayır'),
@@ -18,12 +21,20 @@ class Category(models.Model):
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
-    parent = ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class MPTTMeta:
+        order_insertion_by=['title']
+
     def __str__(self):
-        return self.title
+        full_path= [self.title]
+        k=self.parent
+        while k is not None:
+            full_path.append(k.title)
+            k= k.parent
+        return '->'.join(full_path[::-1])
 
 class Policlinic(models.Model):
     STATUS = (
