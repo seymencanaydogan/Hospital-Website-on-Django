@@ -1,0 +1,52 @@
+{%  extends "homebase.html" %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="icon" type='image/png' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block header %}{% include 'header.html'%}{% endblock %}
+{% block sidebar %}{% include "sidebar.html" %}{% endblock %}
+{% block content %}
+
+{% load static %}  
+  <section id="news" data-stellar-background-ratio="2.5">
+    <div class="container">
+         <div class="row">
+
+              <div class="col-md-12 col-sm-12">
+                   <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
+                        <h2>TIBBİ BİRİMLER KATEGORİSİ</h2>
+                   </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6" >
+                   <!-- NEWS THUMB -->
+                   <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
+                    {% for rs in category %} 
+                        <a href="kategori.html">
+                            <img src="{{rs.image.url}}" class="img-responsive" alt="">
+                        </a>
+                        <div class="news-info">
+                             <span>{{rs.create_at}}</span>
+                             <h3><a href="bos-sayfa.html">{{rs.title}}</a></h3>
+                             <p>{{rs.description}}</p>
+                             <div class="author">
+                                  <div class="author-info">
+                                       
+                                       <p>{{rs.keywords}}</p>
+                                  </div>
+                             </div>
+                        </div>
+                    {% endfor %}
+                   </div>      
+              </div>   
+         </div>
+    </div>
+</section>
+ 
+{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}

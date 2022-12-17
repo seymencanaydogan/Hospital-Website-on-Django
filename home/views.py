@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from home.models import Setting, ContactFormu, ContactFormMessage
-from Policlinic.models import Policlinic
+from Policlinic.models import Policlinic,Category
 
 def index(request):
     setting=Setting.objects.get(pk=1)
@@ -20,6 +20,11 @@ def referans(request):
     setting=Setting.objects.get(pk=1)
     context={'setting':setting , 'page':'referans'}
     return render(request,'referans.html',context)
+
+def kategori(request):
+    category=Category.objects.all()
+    context={'category':category, 'page':'kategori'}
+    return render(request,'kategori.html',context)
 
 def iletisim(request):
     if request.method=='POST':

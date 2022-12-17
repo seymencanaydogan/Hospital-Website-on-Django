@@ -12,6 +12,7 @@ urlpatterns = [
     path('hakkimizda', views.hakkimizda , name='hakkimizda'),
     path('referans', views.referans , name='referans'),
     path('iletisim', views.iletisim , name='iletisim'),
+    path('tibbi-birimler', views.kategori , name='kategori'),
     path('Policlinic/', include('Policlinic.urls')),
     path('', include('home.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
