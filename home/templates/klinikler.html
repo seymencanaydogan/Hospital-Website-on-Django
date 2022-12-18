@@ -19,22 +19,23 @@
 
               <div class="col-md-12 col-sm-12">
                    <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
-                        <h2>TIBBİ BİRİMLER KATEGORİSİ</h2>
+                        <h2>Polikliniklerimiz</h2>
                    </div>
               </div>
-              {% for rs in category %} 
+              {% for rs in policlinics %}
               <div class="col-md-4 col-sm-6 col-xs-6" >
                    <!-- NEWS THUMB -->
                    <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
-                    
-                        <a href="/tibbi-birimler/{{rs.id}}/{{rs.slug}}">
+                     
+                        <a href="/policlinic/{{rs.id}}/{{rs.slug}}">
                             <img src="{{rs.image.url}}" class="img-responsive" alt="">
                         </a>
                         <div class="news-info">
                              <span>{{rs.create_at}}</span>
-                             <h3><a href="/tibbi-birimler/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h3>
+                             <h3><a href="/policlinic/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h3>
                              <p>{{rs.description}}</p>
                         </div>
+                    
                    </div>      
               </div>  
               {% endfor %} 

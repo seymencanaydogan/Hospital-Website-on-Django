@@ -7,8 +7,10 @@ from Policlinic.models import Policlinic,Category
 
 def index(request):
     setting=Setting.objects.get(pk=1)
-    sliderdata=Policlinic.objects.all()[:3]
-    context={'setting':setting, 'page':'home','sliderdata':sliderdata}
+    sliderdata=Policlinic.objects.all().order_by('?')[:4]
+    category=Category.objects.all()
+    policlinicdata=Policlinic.objects.all().order_by('?')[:3]
+    context={'page':'home','setting':setting, 'category':category, 'sliderdata':sliderdata, 'policlinicdata':policlinicdata}
     return render(request,'index.html',context)
 
 def hakkimizda(request):
@@ -21,10 +23,7 @@ def referans(request):
     context={'setting':setting , 'page':'referans'}
     return render(request,'referans.html',context)
 
-def kategori(request):
-    category=Category.objects.all()
-    context={'category':category, 'page':'kategori'}
-    return render(request,'kategori.html',context)
+
 
 def iletisim(request):
     if request.method=='POST':
@@ -44,3 +43,23 @@ def iletisim(request):
     form=ContactFormu()
     context={'setting':setting , 'form':form}
     return render(request,'iletisim.html',context)
+
+def kategori(request):
+    setting=Setting.objects.get(pk=1)
+    category=Category.objects.all()
+    context={'setting':setting ,'category':category,'page':'kategori'}
+    return render(request,'kategori.html',context)
+
+def kategori_policlinics(request,id,slug):
+    setting=Setting.objects.get(pk=1)
+    category=Category.objects.all()
+    policlinics=Policlinic.objects.filter(category_id=id)
+    context={'setting':setting ,'policlinics':policlinics, 'category':category, 'slug':slug}
+    return render(request,'klinikler.html',context)
+
+def policlinic_details(request,id,slug):
+    setting=Setting.objects.get(pk=1)
+    category=Category.objects.all()
+    policlinic=Policlinic.objects.filter(pk=id)
+    context={'setting':setting ,'policlinic':policlinic, 'category':category, 'slug':slug}
+    return render(request,'policlinic_details.html',context)

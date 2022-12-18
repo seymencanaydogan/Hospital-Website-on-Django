@@ -16,6 +16,8 @@ urlpatterns = [
     path('Policlinic/', include('Policlinic.urls')),
     path('', include('home.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('tibbi-birimler/<int:id>/<slug:slug>', views.kategori_policlinics , name='kategori_policlinics'),
+    path('policlinic/<int:id>/<slug:slug>', views.policlinic_details , name='policlinic_details'),
 ]
 if settings.DEBUG: # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
