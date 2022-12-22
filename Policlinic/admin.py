@@ -1,7 +1,7 @@
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
 from mptt.admin import DraggableMPTTAdmin
-from Policlinic.models import Category , Policlinic , Images
+from Policlinic.models import Category , Policlinic , Images, Comment
 
 class PoliclinicImageInline(admin.TabularInline):
     model = Images
@@ -15,6 +15,10 @@ class PoliclinicAdmin(admin.ModelAdmin):
     list_display = ['title','category','image','status']
     list_filter = ['status']
     inlines = [PoliclinicImageInline]
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['subject','comment','policlinic','user','status']
+    list_filter = ['status']
 
 class ImagesAdmin(admin.ModelAdmin):
     list_display = ['title','policlinic','image']
@@ -55,3 +59,4 @@ class CategoryAdmin2(DraggableMPTTAdmin):
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Policlinic,PoliclinicAdmin)
 admin.site.register(Images,ImagesAdmin)
+admin.site.register(Comment,CommentAdmin)

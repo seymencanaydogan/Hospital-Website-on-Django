@@ -1,12 +1,17 @@
 {%  extends "homebase.html" %}
 
+{% load static %}
+
 {% block title %} {{ setting.title }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
-
+{% load static %}
 {% block head %}
     <link rel="icon" type='image/png' href='{{ setting.icon.url }}'/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/extra.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/starrating.css' %}"/>
 {% endblock %}
+
 
 {% block header %}{% include 'header.html'%}{% endblock %}
 {% block sidebar %}{% include "sidebar.html" %}{% endblock %}
@@ -25,71 +30,147 @@
                             </div>
                             <h3>{{rs.title}}</h3>
                             <p>{{rs.detail|safe}}</p>
-                            
-                            <div class="news-social-share">
-                                 <h4>Sosyal Medyada Paylaş</h4>
-                                      <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>Facebook</a>
-                                      <a href="#" class="btn btn-success"><i class="fa fa-twitter"></i>Twitter</a>
-                                      <a href="#" class="btn btn-danger"><i class="fa fa-google-plus"></i>Google+</a>
-                            </div>
+
+                            <h3>{{rs.title}} Polikliniği Resim Galerisi</h3>
+                            {% for ns in images %}
+                              <div class="gallery cf">
+                                   <div>
+                                        <img src="{{ns.image.url}}" class="img-responsive" alt="">
+                                   </div>
+                              </div>
+                              {%endfor%}
                        </div>
                   </div>
-
                   <div class="col-md-4 col-sm-5">
-                       <div class="news-sidebar">
-                            <div class="news-author">
-                                 <h4>About the author</h4>
-                                 <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque.</p>
-                            </div>
+                    <div class="news-sidebar">
+                         <div class="news-author">
+                              <h4>Poliklinik Hakkında</h4>
+                              <p>{{rs.description}}</p>
+                         </div>
 
-                            <div class="recent-post">
-                                 <h4>Recent Posts</h4>
+                         <div class="recent-post">
+                              <h4>Doktorlarımız</h4>
 
-                                      <div class="media">
-                                           <div class="media-object pull-left">
-                                                <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                           </div>
-                                           <div class="media-body">
-                                                <h4 class="media-heading"><a href="#">Introducing a new healing process</a></h4>
-                                           </div>
-                                      </div>
+                                   <div class="media">
+                                        <div class="media-object pull-left">
+                                             <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                        </div>
+                                        <div class="media-body">
+                                             <h4 class="media-heading"><a href="#">Introducing a new healing process</a></h4>
+                                        </div>
+                                   </div>
 
-                                      <div class="media">
-                                           <div class="media-object pull-left">
-                                                <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                           </div>
-                                           <div class="media-body">
-                                                <h4 class="media-heading"><a href="#">About Amazing Technology</a></h4>
-                                           </div>
-                                      </div>
-                            </div>
+                                   <div class="media">
+                                        <div class="media-object pull-left">
+                                             <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                        </div>
+                                        <div class="media-body">
+                                             <h4 class="media-heading"><a href="#">About Amazing Technology</a></h4>
+                                        </div>
+                                   </div>
+                         </div>
 
-                            <div class="news-categories">
-                                 <h4>Categories</h4>
-                                      <li><a href="#"><i class="fa fa-angle-right"></i> Dental</a></li>
-                                      <li><a href="#"><i class="fa fa-angle-right"></i> Cardiology</a></li>
-                                      <li><a href="#"><i class="fa fa-angle-right"></i> Health</a></li>
-                                      <li><a href="#"><i class="fa fa-angle-right"></i> Consultant</a></li>
-                            </div>
+                         <div class="news-social-share">
+                              <h4>Sosyal Medyada Bizi Takip Edin</h4>
+                                   <a href={{setting.facebook}} class="btn btn-primary"><i class="fa fa-facebook"></i>Facebook</a>
+                                   <a href={{setting.twitter}} class="btn btn-success"><i class="fa fa-twitter"></i>Twitter</a>
+                                   <a href={{setting.instagram}}  class="btn btn-danger"><i class="fa fa-instagram"></i>Instagram</a>
+                         </div> 
+                    </div>  
+               </div>              
+          </div> 
+          {%endfor%}
+          
+           <!-- Main Body -->
+           <section>
+               <div class="container">
+                   <div class="row">
+                       <div class="col-sm-5 col-md-6 col-12 pb-4">
+                           <h1>Comments</h1>
+                           <div class="comment mt-4 text-justify float-left">
+                               <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
+                               <h4>Jhon Doe</h4>
+                               <span>- 20 October, 2018</span>
+                               <br>
+                               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                           </div>
+                           <div class="text-justify darker mt-4 float-right">
+                               <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
+                               <h4>Rob Simpson</h4>
+                               <span>- 20 October, 2018</span> 
+                               <br>
+                               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                           </div>
+                           <div class="comment mt-4 text-justify">
+                               <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
+                               <h4>Jhon Doe</h4>
+                               <span>- 20 October, 2018</span>
+                               <br>
+                               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                           </div>
+                           <div class="darker mt-4 text-justify">
+                               <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
+                               <h4>Rob Simpson</h4>
+                               <span>- 20 October, 2018</span> 
 
-                            <div class="news-ads sidebar-ads">
-                                 <h4>Sidebar Banner Ad</h4>
-                            </div>
-
-                            <div class="news-tags">
-                                 <h4>Tags</h4>
-                                      <li><a href="#">Pregnancy</a></li>
-                                      <li><a href="#">Health</a></li>
-                                      <li><a href="#">Consultant</a></li>
-                                      <li><a href="#">Medical</a></li>
-                                      <li><a href="#">Doctors</a></li>
-                                      <li><a href="#">Social</a></li>
-                            </div>
+                               <br>
+                               <p >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                           </div>
                        </div>
-                       
-                  </div>
-               {%endfor%}
+                       <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                           <form id="algin-form">
+                               <div class="form-group">
+                                   <h4>Leave a comment</h4>
+                                   <label for="message">Message</label>
+                                   <textarea name="msg" id=""msg cols="30" rows="5" class="form-control"></textarea>
+                               </div>
+                               <div class="form-group">
+                                   <label for="name">Name</label>
+                                   <input type="text" name="name" id="fullname" class="form-control">
+                               </div>
+                               <div class="form-group">
+                                   <label for="email">Email</label>
+                                   <input type="text" name="email" id="email" class="form-control">
+                               </div>
+                              
 
+                               <form>
+                                   <fieldset class="rating">
+                                   
+                                      <legend>Puanınız:</legend>
+                                      <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked=""
+                                         aria-label="No rating.">
+                             
+                                      <input type="radio" id="rate1" name="rating" value="1">
+                                      <label for="rate1">1 star</label>
+                             
+                                      <input type="radio" id="rate2" name="rating" value="2">
+                                      <label for="rate2">2 stars</label>
+                             
+                                      <input type="radio" id="rate3" name="rating" value="3">
+                                      <label for="rate3">3 stars</label>
+                             
+                                      <input type="radio" id="rate4" name="rating" value="4">
+                                      <label for="rate4">4 stars</label>
+                             
+                                      <input type="radio" id="rate5" name="rating" value="5">
+                                      <label for="rate5">5 stars</label>
+                             
+                                      <span class="focus-ring"></span>
+                                   </fieldset>
+                                </form>
+
+
+                               <div class="form-group">
+                                   <button type="button" id="post" class="btn">Post Comment</button>
+                               </div>
+                               
+                           </form>
+                           
+                       </div>
+                   </div>
+               </div>
+           </section>
              </div>
         </div>
    </section>
