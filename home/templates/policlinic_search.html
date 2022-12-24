@@ -1,0 +1,38 @@
+{%  extends "homebase.html" %}
+
+{% block title %} Search {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% load static %}
+{% block head %}
+    <link rel="icon" type='image/png' href='{{ setting.icon.url }}'/>
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+{% block header %}{% include 'header.html'%}{% endblock %}
+{% block sidebar %}{% include "sidebar.html" %}{% endblock %}
+{% block content %}
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <table cellpadding="3" width="1200">
+                <tr>
+                    <th>Resim</th>
+                    <th>Poliklinik Adı</th>
+                    <th>Kategori</th>
+                </tr>
+                {%for rs in policlinics%}
+                    <tr>
+                        <td> <a href="/policlinic/{{rs.id}}/{{rs.slug}}"><img src="{{rs.image.url}}" class="img-responsive" alt=""></a></td>
+                        <td> <h4 class="policlinic-name"><a href="/policlinic/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h4></td>
+                        <td> <a href="/tibbi-birimler/{{rs.category.id}}/{{rs.category.slug}}">{{rs.category}}</a></td>
+                    </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}

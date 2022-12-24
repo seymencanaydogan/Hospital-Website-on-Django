@@ -18,6 +18,11 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('tibbi-birimler/<int:id>/<slug:slug>', views.kategori_policlinics , name='kategori_policlinics'),
     path('policlinic/<int:id>/<slug:slug>', views.policlinic_details , name='policlinic_details'),
+    path('policlinic/addcomment/<int:id>',views.addcomment,name='addcomment'),
+    path('search/',views.policlinic_search,name='policlinic_search'),
+    path('logout/',views.logout_view,name='logout_view'),
+    path('login/',views.login_view,name='login_view'),
 ]
+
 if settings.DEBUG: # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

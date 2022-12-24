@@ -1,15 +1,14 @@
 {%  extends "homebase.html" %}
 
-{% load static %}
-
 {% block title %} {{ setting.title }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 {% load static %}
 {% block head %}
     <link rel="icon" type='image/png' href='{{ setting.icon.url }}'/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/extra.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/starrating.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ekstra.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/yildiz.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/deneme.css' %}"/>
 {% endblock %}
 
 
@@ -47,130 +46,75 @@
                               <h4>Poliklinik Hakkında</h4>
                               <p>{{rs.description}}</p>
                          </div>
-
+                         <h4>Bir Yorum Bırakın</h4>
                          <div class="recent-post">
-                              <h4>Doktorlarımız</h4>
-
-                                   <div class="media">
-                                        <div class="media-object pull-left">
-                                             <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                        </div>
-                                        <div class="media-body">
-                                             <h4 class="media-heading"><a href="#">Introducing a new healing process</a></h4>
-                                        </div>
+                         {%if messages%}
+                              {%for message in messages%}
+                                   <div class="alert alert-{{message.tags}}"role="alert">
+                                        {{message}}
                                    </div>
+                              {%endfor%}
+                         {%endif%}
+                              <form id="comment-form" action="/policlinic/addcomment/{{rs.id}}" method="post">
+                              {% csrf_token %}
+                                   <label for="name">Konu:</label>
+                                   <input type="text" id="subject" name="subject" placeholder="Bir konu yazınız."><br>
+                                   <label for="name">Yorumunuz:</label>
+                                   <textarea name="comment" id="id_comment" placeholder="Bu polikliniğimiz hakkında ne düşünüyorsunuz?"></textarea><br>
 
-                                   <div class="media">
-                                        <div class="media-object pull-left">
-                                             <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                        </div>
-                                        <div class="media-body">
-                                             <h4 class="media-heading"><a href="#">About Amazing Technology</a></h4>
-                                        </div>
+                                   <label for="rating">Puanlayın:</label>
+                                   <div class="rating">
+                                        <input type="radio" name="rate" value="5" id="5"><label for="5">☆</label>
+                                        <input type="radio" name="rate" value="4" id="4"><label for="4">☆</label>
+                                        <input type="radio" name="rate" value="3" id="3"><label for="3">☆</label>
+                                        <input type="radio" name="rate" value="2" id="2"><label for="2">☆</label>
+                                        <input type="radio" name="rate" value="1" id="1"><label for="1">☆</label>
+                                      
                                    </div>
-                         </div>
+                                   {%if user.id is not None%}
+                                   <button type="submit">Gönder</button>
+                                   {%else%}
+                                        Yorum eklemek için login olunuz!
+                                   {% endif %}
+                              </form>
+                                 
+                                 <div id="comments">
+                                   <h3>Yorumlar</h3>
+                                   <ul>
+                                   {%for cm in comments%}
+                                   <li>
+                                   <div class="comment">
+                                        <div class="review">
+                                             <p class="comment-text">{{cm.subject}}</p>
 
-                         <div class="news-social-share">
-                              <h4>Sosyal Medyada Bizi Takip Edin</h4>
-                                   <a href={{setting.facebook}} class="btn btn-primary"><i class="fa fa-facebook"></i>Facebook</a>
-                                   <a href={{setting.twitter}} class="btn btn-success"><i class="fa fa-twitter"></i>Twitter</a>
-                                   <a href={{setting.instagram}}  class="btn btn-danger"><i class="fa fa-instagram"></i>Instagram</a>
-                         </div> 
+                                             
+                                             <div class="rating">
+                                                  <span class="star {% if cm.rate > 4 %} active {% endif %}">★</span>
+                                                  <span class="star {% if cm.rate > 3 %} active {% endif %}">★</span>
+                                                  <span class="star {% if cm.rate > 3 %} active {% endif %}">★</span>
+                                                  <span class="star {% if cm.rate > 1 %} active {% endif %}">★</span>
+                                                  <span class="star {% if cm.rate > 0 %} active {% endif %}">★</span>
+                                             </div>
+
+
+                                             <p class="comment-text">{{cm.comment}}</p>
+                                             <p class="comment-author">{{cm.create_at}}</p>
+                                             <p class="comment-author">-{{cm.user}}</p>
+                                       </div> 
+                                   </li>
+                                   {%endfor%}
+                                   </ul>
+                                   </div>
+     
+                                   
+                         </div>   
                     </div>  
                </div>              
           </div> 
           {%endfor%}
           
-           <!-- Main Body -->
-           <section>
-               <div class="container">
-                   <div class="row">
-                       <div class="col-sm-5 col-md-6 col-12 pb-4">
-                           <h1>Comments</h1>
-                           <div class="comment mt-4 text-justify float-left">
-                               <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
-                               <h4>Jhon Doe</h4>
-                               <span>- 20 October, 2018</span>
-                               <br>
-                               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
-                           </div>
-                           <div class="text-justify darker mt-4 float-right">
-                               <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
-                               <h4>Rob Simpson</h4>
-                               <span>- 20 October, 2018</span> 
-                               <br>
-                               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
-                           </div>
-                           <div class="comment mt-4 text-justify">
-                               <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
-                               <h4>Jhon Doe</h4>
-                               <span>- 20 October, 2018</span>
-                               <br>
-                               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
-                           </div>
-                           <div class="darker mt-4 text-justify">
-                               <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
-                               <h4>Rob Simpson</h4>
-                               <span>- 20 October, 2018</span> 
 
-                               <br>
-                               <p >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
-                           </div>
-                       </div>
-                       <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
-                           <form id="algin-form">
-                               <div class="form-group">
-                                   <h4>Leave a comment</h4>
-                                   <label for="message">Message</label>
-                                   <textarea name="msg" id=""msg cols="30" rows="5" class="form-control"></textarea>
-                               </div>
-                               <div class="form-group">
-                                   <label for="name">Name</label>
-                                   <input type="text" name="name" id="fullname" class="form-control">
-                               </div>
-                               <div class="form-group">
-                                   <label for="email">Email</label>
-                                   <input type="text" name="email" id="email" class="form-control">
-                               </div>
-                              
-
-                               <form>
-                                   <fieldset class="rating">
-                                   
-                                      <legend>Puanınız:</legend>
-                                      <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked=""
-                                         aria-label="No rating.">
-                             
-                                      <input type="radio" id="rate1" name="rating" value="1">
-                                      <label for="rate1">1 star</label>
-                             
-                                      <input type="radio" id="rate2" name="rating" value="2">
-                                      <label for="rate2">2 stars</label>
-                             
-                                      <input type="radio" id="rate3" name="rating" value="3">
-                                      <label for="rate3">3 stars</label>
-                             
-                                      <input type="radio" id="rate4" name="rating" value="4">
-                                      <label for="rate4">4 stars</label>
-                             
-                                      <input type="radio" id="rate5" name="rating" value="5">
-                                      <label for="rate5">5 stars</label>
-                             
-                                      <span class="focus-ring"></span>
-                                   </fieldset>
-                                </form>
-
-
-                               <div class="form-group">
-                                   <button type="button" id="post" class="btn">Post Comment</button>
-                               </div>
-                               
-                           </form>
-                           
-                       </div>
-                   </div>
-               </div>
-           </section>
+           
              </div>
         </div>
    </section>

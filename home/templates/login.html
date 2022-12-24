@@ -1,0 +1,54 @@
+{%  extends "homebase.html" %}
+
+{% block title %} Login {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="icon" type='image/png' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block header %}{% include 'header.html'%}{% endblock %}
+{% block sidebar %}{% include "sidebar.html" %}{% endblock %}
+{% block content %}
+     <div class="section">
+          <div class="container">
+               <div class="row">
+                    <div class="col-md-4">
+                         <div class="billing-details">
+                              <div class="section-title">
+                                   <h3 class="title">Login</h3>
+                              </div>
+
+                              {% if messages%}
+                                   {%for message in messages%}
+                                        <div class="alert alert-{{message.tags}}" role="alert">
+                                             {{message}}
+                                        </div>
+                                   {%endfor %}
+                              {% endif %}
+
+                              <form action="" method="post">
+                                   {%  csrf_token %}
+                                   <form>
+                                    <label for="inputName">Username:</label><br>
+                                    <input type="text" id="username" name="username"><br>
+                                  </form> 
+                                  <form>
+                                    <label for="inputName">Password:</label><br>
+                                    <input type="password" id="password" name="password"><br>
+                                  </form> 
+                                   <input type="submit" value="Login">
+                              </form>
+
+                         </div>
+                    
+                    </section>
+               </div>
+          </div>
+     </div>
+
+
+ 
+{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}

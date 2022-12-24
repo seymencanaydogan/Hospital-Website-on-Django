@@ -1,0 +1,17 @@
+.rating {
+display: flex;
+flex-direction: row-reverse;
+justify-content: start;
+font-size: 2em;
+color: gold;
+}
+
+.rating .star {
+  color: grey;
+}
+
+.rating .star.active {
+  color: gold;
+}
+
+

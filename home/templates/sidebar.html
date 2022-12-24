@@ -23,9 +23,20 @@
                   <a href="" class="navbar-brand"><i class="fa fa-h-square"></i>ealth Center</a>
              </div>
 
+             
+
              <!-- MENU LINKS -->
              <div class="collapse navbar-collapse">
+               <form action="/search/" method="POST">
+                    {%csrf_token%}
+                    <div class="search-box">
+                         <input type="text" name="query" placeholder="Arayın...">
+                         <button class="search-btn"><i class="fa fa-search"></i></button>
+                    </div>
+               </form>
+
                   <ul class="nav navbar-nav navbar-right">
+                    
                        <li><a href="/" class="smoothScroll">ANASAYFA</a></li>
                        <li><a href="/hakkimizda" class="smoothScroll">HAKKIMIZDA</a></li>
                        <li><a href="/tibbi-birimler" class="smoothScroll">TIBBİ BİRİMLER</a></li>
@@ -33,6 +44,13 @@
                        <li><a href="/iletisim" class="smoothScroll">İLETİŞİM</a></li>
                        <li><a href="/referans" class="smoothScroll">REFERANS</a></li>
                        <li class="appointment-btn"><a href="/randevu">RANDEVU AL</a></li>
+                       {%if user.id is not None%}
+                       <li><a href="#" class="smoothScroll">{{user.first_name}}</a></li>
+                       <li class="appointment-btn"><a href="/logout/">Log out</a></li>
+                       {%else%}
+                       <li class="appointment-btn"><a href="/login/">Login</a></li>
+                       {%endif%}
+                       
                   </ul>
              </div>
 

@@ -36,6 +36,10 @@ class Category(MPTTModel):
             k= k.parent
         return '->'.join(full_path[::-1])
 
+    def get_absolute_url(self):
+        return reverse("category_detail", kwargs={"slug": self.slug})
+    
+
 class Policlinic(models.Model):
     STATUS = (
         ('True', 'Evet'),
@@ -55,6 +59,10 @@ class Policlinic(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("policlinic_detail", kwargs={"slug": self.slug})
+    
+
 class Images(models.Model):
     policlinic=models.ForeignKey(Policlinic,on_delete=models.CASCADE)
     title = models.CharField(max_length=50,blank=True)
@@ -70,9 +78,9 @@ class Comment(models.Model):
     )
     policlinic=models.ForeignKey(Policlinic,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    subject=models.CharField(max_length=50,blank=True)
-    comment=models.TextField(max_length=200,blank=True)
-    rate=models.IntegerField(blank=True)
+    subject=models.CharField(max_length=50)
+    comment=models.TextField(max_length=200)
+    rate=models.IntegerField(blank=False)
     status = models.CharField(max_length=10, choices=STATUS,default='New')
     ip=models.CharField(max_length=20,blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
@@ -85,3 +93,5 @@ class CommentForm(ModelForm):
     class Meta:
         model=Comment
         fields=['subject','comment','rate']
+
+
