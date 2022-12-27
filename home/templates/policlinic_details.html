@@ -32,18 +32,18 @@
 
                             <h3>{{rs.title}} Polikliniği Resim Galerisi</h3>
                             {% for ns in images %}
-                              <div class="gallery cf">
-                                   <div>
-                                        <img src="{{ns.image.url}}" class="img-responsive" alt="">
+                                   <div class="gallery cf">
+                                        <div>
+                                             <img src="{{ns.image.url}}" class="img-responsive" alt="">
+                                        </div>
                                    </div>
-                              </div>
                               {%endfor%}
                        </div>
                   </div>
                   <div class="col-md-4 col-sm-5">
                     <div class="news-sidebar">
                          <div class="news-author">
-                              <h4>Poliklinik Hakkında</h4>
+                              <h3>Poliklinik Hakkında</h3>
                               <p>{{rs.description}}</p>
                          </div>
                          <h4>Bir Yorum Bırakın</h4>
@@ -55,12 +55,12 @@
                                    </div>
                               {%endfor%}
                          {%endif%}
-                              <form id="comment-form" action="/policlinic/addcomment/{{rs.id}}" method="post">
+                              <form id="appointment-form" role="form" action="/policlinic/addcomment/{{rs.id}}" method="post">
                               {% csrf_token %}
                                    <label for="name">Konu:</label>
-                                   <input type="text" id="subject" name="subject" placeholder="Bir konu yazınız."><br>
+                                   <input type="name" class="form-control" id="subject" name="subject" placeholder="Bir konu yazınız.">
                                    <label for="name">Yorumunuz:</label>
-                                   <textarea name="comment" id="id_comment" placeholder="Bu polikliniğimiz hakkında ne düşünüyorsunuz?"></textarea><br>
+                                   <textarea class="form-control" rows="5" id="id_comment" name="comment" placeholder="Yorumunuz"></textarea>
 
                                    <label for="rating">Puanlayın:</label>
                                    <div class="rating">
@@ -72,7 +72,7 @@
                                       
                                    </div>
                                    {%if user.id is not None%}
-                                   <button type="submit">Gönder</button>
+                                   <button type="submit" class="form-control" id="cf-submit" name="submit">Gönder</button>
                                    {%else%}
                                         Yorum eklemek için login olunuz!
                                    {% endif %}
@@ -85,9 +85,7 @@
                                    <li>
                                    <div class="comment">
                                         <div class="review">
-                                             <p class="comment-text">{{cm.subject}}</p>
-
-                                             
+                                        
                                              <div class="rating">
                                                   <span class="star {% if cm.rate > 4 %} active {% endif %}">★</span>
                                                   <span class="star {% if cm.rate > 3 %} active {% endif %}">★</span>
@@ -96,9 +94,9 @@
                                                   <span class="star {% if cm.rate > 0 %} active {% endif %}">★</span>
                                              </div>
 
-
+                                             <p class="comment-text" style="font-weight: bold;">{{cm.subject}}</p>
                                              <p class="comment-text">{{cm.comment}}</p>
-                                             <p class="comment-author">{{cm.create_at}}</p>
+                                             <p class="comment-author" style="font-style: italic;">{{cm.create_at}}</p>
                                              <p class="comment-author">-{{cm.user}}</p>
                                        </div> 
                                    </li>

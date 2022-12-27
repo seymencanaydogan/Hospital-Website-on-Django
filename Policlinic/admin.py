@@ -1,7 +1,7 @@
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
 from mptt.admin import DraggableMPTTAdmin
-from Policlinic.models import Category , Policlinic , Images, Comment
+from Policlinic.models import Category , Policlinic , Images, Comment, Doctors, Randevu
 
 class PoliclinicImageInline(admin.TabularInline):
     model = Images
@@ -12,7 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ['status']
 
 class PoliclinicAdmin(admin.ModelAdmin):
-    list_display = ['title','category','image','status']
+    list_display = ['title','category','image_tag','status']
     list_filter = ['status']
     inlines = [PoliclinicImageInline]
     prepopulated_fields={'slug':('title',)}
@@ -21,8 +21,11 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ['subject','comment','policlinic','user','status']
     list_filter = ['status']
 
+class DoctorsAdmin(admin.ModelAdmin):
+    list_display = ['name','category','policlinic','image_tag']
+
 class ImagesAdmin(admin.ModelAdmin):
-    list_display = ['title','policlinic','image']
+    list_display = ['title','policlinic','image_tag']
 
 class CategoryAdmin2(DraggableMPTTAdmin):
     mptt_indent_field = "title"
@@ -58,7 +61,13 @@ class CategoryAdmin2(DraggableMPTTAdmin):
         return instance.policlinics_cumulative_count
     related_policlinics_cumulative_count.short_description = 'Related policlinics (in tree)'
 
+class RandevuAdmin(admin.ModelAdmin):
+    list_display = ['user','policlinic','doctor','date','time','status']
+    list_filter = ['status']
+
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Policlinic,PoliclinicAdmin)
 admin.site.register(Images,ImagesAdmin)
 admin.site.register(Comment,CommentAdmin)
+admin.site.register(Doctors,DoctorsAdmin)
+admin.site.register(Randevu,RandevuAdmin)

@@ -17,10 +17,11 @@
                        <span class="icon icon-bar"></span>
                        <span class="icon icon-bar"></span>
                        <span class="icon icon-bar"></span>
+                       
                   </button>
 
                   <!-- lOGO TEXT HERE -->
-                  <a href="" class="navbar-brand"><i class="fa fa-h-square"></i>ealth Center</a>
+                  <a href="/" class="navbar-brand"><i class="fa fa-h-square"></i>MedicalPark</a>
              </div>
 
              
@@ -30,7 +31,7 @@
                <form action="/search/" method="POST">
                     {%csrf_token%}
                     <div class="search-box">
-                         <input type="text" name="query" placeholder="Arayın...">
+                         <input type="text" name="query" placeholder="Arayın..." >
                          <button class="search-btn"><i class="fa fa-search"></i></button>
                     </div>
                </form>
@@ -42,13 +43,15 @@
                        <li><a href="/tibbi-birimler" class="smoothScroll">TIBBİ BİRİMLER</a></li>
                        <li><a href="/doktorlar" class="smoothScroll">DOKTORLAR</a></li>
                        <li><a href="/iletisim" class="smoothScroll">İLETİŞİM</a></li>
-                       <li><a href="/referans" class="smoothScroll">REFERANS</a></li>
-                       <li class="appointment-btn"><a href="/randevu">RANDEVU AL</a></li>
+                       <li><a href="/sss" class="smoothScroll">SSS</a></li>
+                       <li><a href="/randevu" class="smoothScroll">RANDEVU</a></li>
+                       
                        {%if user.id is not None%}
-                       <li><a href="#" class="smoothScroll">{{user.first_name}}</a></li>
+                       <li><a href="/profile" class="smoothScroll"  style="font-style: italic;">{{user.first_name}} {{user.last_name}}</a></li>
                        <li class="appointment-btn"><a href="/logout/">Log out</a></li>
                        {%else%}
                        <li class="appointment-btn"><a href="/login/">Login</a></li>
+                       <li class="appointment-btn"><a href="/register/">Register</a></li>
                        {%endif%}
                        
                   </ul>

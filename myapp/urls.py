@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('home.urls')),
     path('hakkimizda', views.hakkimizda , name='hakkimizda'),
-    path('referans', views.referans , name='referans'),
+    path('sss', views.faq , name='faq'),
     path('iletisim', views.iletisim , name='iletisim'),
     path('tibbi-birimler', views.kategori , name='kategori'),
     path('Policlinic/', include('Policlinic.urls')),
@@ -20,8 +20,12 @@ urlpatterns = [
     path('policlinic/<int:id>/<slug:slug>', views.policlinic_details , name='policlinic_details'),
     path('policlinic/addcomment/<int:id>',views.addcomment,name='addcomment'),
     path('search/',views.policlinic_search,name='policlinic_search'),
+    path('doktorlar',views.doctors,name='doctors'),
     path('logout/',views.logout_view,name='logout_view'),
     path('login/',views.login_view,name='login_view'),
+    path('register/',views.register_view,name='register_view'),
+    path('randevu',views.randevu,name='randevu'),
+    path('profile',views.profile,name='profile'),
 ]
 
 if settings.DEBUG: # new

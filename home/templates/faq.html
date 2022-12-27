@@ -1,0 +1,35 @@
+{%  extends "homebase.html" %}
+
+{% block title %} Sıkça Sorulan Sorular {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% load static %}
+{% block head %}
+    <link rel="icon" type='image/png' href='{{ setting.icon.url }}'/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/faq.css' %}"/>
+{% endblock %}
+
+{% block header %}{% include 'header.html'%}{% endblock %}
+{% block sidebar %}{% include "sidebar.html" %}{% endblock %}
+{% block content %}
+     <section id="news-detail" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+               
+                    <div class="col-md-12 col-sm-12">
+                         <div id="accordion">
+                              <div class="faq">
+                                   <h2 class="wow fadeInUp" data-wow-delay="0.1s">Sıkça Sorulan Sorular</h2>
+                                   {%for rs in faq%}
+                                   <button class="accordion">{{rs.id}}. {{rs.question}}</button>
+                                   <div class="panel">
+                                     <p>-> {{rs.answer}}</p>
+                                   </div>
+                                   {%endfor%}
+                              </div>
+                         </div>
+                    </div>               
+          </div>
+     </section>
+{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}

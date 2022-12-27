@@ -59,6 +59,9 @@ class Policlinic(models.Model):
     def __str__(self):
         return self.title
 
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+
     def get_absolute_url(self):
         return reverse("policlinic_detail", kwargs={"slug": self.slug})
     
@@ -69,6 +72,9 @@ class Images(models.Model):
     image = models.ImageField(blank=True, upload_to='images/')
     def __str__(self):
         return self.title
+
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
 
 class Comment(models.Model):
     STATUS = (
@@ -93,5 +99,51 @@ class CommentForm(ModelForm):
     class Meta:
         model=Comment
         fields=['subject','comment','rate']
+
+class Doctors(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    policlinic=models.ForeignKey(Policlinic,on_delete=models.CASCADE)
+    name = models.CharField(max_length=50,blank=True)
+    image = models.ImageField(blank=True, upload_to='images/')
+    address = models.CharField(blank=True, max_length=150)
+    phone = models.CharField(blank=True, max_length=15)
+    email = models.CharField(blank=True, max_length=50)
+    linkedin = models.CharField(blank=True, max_length=50)
+    twitter = models.CharField(blank=True, max_length=50)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.name
+
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+
+class Randevu(models.Model):
+    STATUS = (
+        ('New', 'Yeni'),
+        ('True', 'Onaylandı'),
+        ('False', 'Onaylanmadı'),
+    )
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    policlinic=models.CharField(max_length=50)
+    doctor=models.CharField(max_length=50)
+    phone = models.CharField(max_length=20)
+    email = models.CharField(max_length=50)
+    date=models.DateField(null=True)
+    time=models.TimeField(null=True)
+    payment= models.CharField(max_length=50)
+    insurance= models.CharField(max_length=50)
+    note=models.TextField(max_length=200)
+    status = models.CharField(max_length=15, choices=STATUS,default='New')
+    ip=models.CharField(max_length=20,blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+    def str(self):
+        return self.user.username
+
+class AppointmentForm(ModelForm):
+    class Meta:
+        model=Randevu
+        fields=['policlinic','doctor','phone','email','date','time','payment','insurance','note']
 
 

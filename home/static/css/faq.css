@@ -1,0 +1,30 @@
+.faq {
+  width: 80%; /* Adjust width as desired */
+  margin: 0 auto; /* Center the FAQ on the page */
+}
+
+.accordion {
+  background-color: #eee; /* Light gray background color */
+  color: #444; /* Dark text color */
+  cursor: pointer; /* Change cursor on hover */
+  padding: 18px; /* Add some padding for aesthetics */
+  width: 100%; /* Full width */
+  border: none; /* Remove border */
+  text-align: left; /* Align text to the left */
+  outline: none; /* Remove outline */
+  font-size: 15px; /* Increase font size */
+  transition: 0.4s; /* Add transition effect on hover */
+}
+
+.active, .accordion:hover {
+  /* Style the active or hovered accordion */
+  background-color: #ccc; /* Light gray background color */
+}
+
+.panel {
+  /* Style the panel */
+  display: none; /* Hide the panel by default */
+  padding: 0 18px; /* Add some padding */
+  background-color: white; /* White background color */
+  overflow: hidden; /* Hide content that overflows its container */
+}

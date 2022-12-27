@@ -6,18 +6,10 @@
 
                   <div class="col-md-6 col-sm-6">
                        <div class="about-info">
-                            <h2 class="wow fadeInUp" data-wow-delay="0.6s">Welcome to Your <i class="fa fa-h-square"></i>ealth Center</h2>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.6s">{{setting.title}}</h2>
                             <div class="wow fadeInUp" data-wow-delay="0.8s">
-                                 <p>Aenean luctus lobortis tellus, vel ornare enim molestie condimentum. Curabitur lacinia nisi vitae velit volutpat venenatis.</p>
-                                 <p>Sed a dignissim lacus. Quisque fermentum est non orci commodo, a luctus urna mattis. Ut placerat, diam a tempus vehicula.</p>
+                                 <p>{{setting.description}}</p>
                             </div>
-                            <figure class="profile wow fadeInUp" data-wow-delay="1s">
-                                 <img src="{% static 'images/author-image.jpg' %}" class="img-responsive" alt="">
-                                 <figcaption>
-                                      <h3>Dr. Neil Jackson</h3>
-                                      <p>General Principal</p>
-                                 </figcaption>
-                            </figure>
                        </div>
                   </div>
                   
@@ -26,83 +18,44 @@
    </section>
 
 
-   <!-- TEAM -->
-   <section id="team" data-stellar-background-ratio="1">
-        <div class="container">
-             <div class="row">
-
-                  <div class="col-md-6 col-sm-6">
-                       <div class="about-info">
-                            <h2 class="wow fadeInUp" data-wow-delay="0.1s">Our Doctors</h2>
-                       </div>
-                  </div>
-
-                  <div class="clearfix"></div>
-
-                  <div class="col-md-4 col-sm-6">
-                       <div class="team-thumb wow fadeInUp" data-wow-delay="0.2s">
-                            <img src="{% static 'images/team-image1.jpg' %}" class="img-responsive" alt="">
-
-                                 <div class="team-info">
-                                      <h3>Nate Baston</h3>
-                                      <p>General Principal</p>
-                                      <div class="team-contact-info">
-                                           <p><i class="fa fa-phone"></i> 010-020-0120</p>
-                                           <p><i class="fa fa-envelope-o"></i> <a href="#">general@company.com</a></p>
-                                      </div>
-                                      <ul class="social-icon">
-                                           <li><a href="#" class="fa fa-linkedin-square"></a></li>
-                                           <li><a href="#" class="fa fa-envelope-o"></a></li>
-                                      </ul>
-                                 </div>
-
-                       </div>
-                  </div>
-
-                  <div class="col-md-4 col-sm-6">
-                       <div class="team-thumb wow fadeInUp" data-wow-delay="0.4s">
-                            <img src="{% static 'images/team-image2.jpg' %}" class="img-responsive" alt="">
-
-                                 <div class="team-info">
-                                      <h3>Jason Stewart</h3>
-                                      <p>Pregnancy</p>
-                                      <div class="team-contact-info">
-                                           <p><i class="fa fa-phone"></i> 010-070-0170</p>
-                                           <p><i class="fa fa-envelope-o"></i> <a href="#">pregnancy@company.com</a></p>
-                                      </div>
-                                      <ul class="social-icon">
-                                           <li><a href="#" class="fa fa-facebook-square"></a></li>
-                                           <li><a href="#" class="fa fa-envelope-o"></a></li>
-                                           <li><a href="#" class="fa fa-flickr"></a></li>
-                                      </ul>
-                                 </div>
-
-                       </div>
-                  </div>
-
-                  <div class="col-md-4 col-sm-6">
-                       <div class="team-thumb wow fadeInUp" data-wow-delay="0.6s">
-                            <img src="{% static 'images/team-image3.jpg' %}" class="img-responsive" alt="">
-
-                                 <div class="team-info">
-                                      <h3>Miasha Nakahara</h3>
-                                      <p>Cardiology</p>
-                                      <div class="team-contact-info">
-                                           <p><i class="fa fa-phone"></i> 010-040-0140</p>
-                                           <p><i class="fa fa-envelope-o"></i> <a href="#">cardio@company.com</a></p>
-                                      </div>
-                                      <ul class="social-icon">
-                                           <li><a href="#" class="fa fa-twitter"></a></li>
-                                           <li><a href="#" class="fa fa-envelope-o"></a></li>
-                                      </ul>
-                                 </div>
-
-                       </div>
-                  </div>
-                  
-             </div>
-        </div>
-   </section>
+  <!-- TEAM -->
+  <section id="team" data-stellar-background-ratio="1">
+     <div class="container">
+          <div class="row">
+ 
+               <div class="col-md-6 col-sm-6">
+                    <div class="about-info">
+                         <h2 class="wow fadeInUp" data-wow-delay="0.1s">Doktorlarımız</h2>
+                    </div>
+               </div>
+ 
+               <div class="clearfix"></div>
+               {% for rs in doctordata %}
+               <div class="col-md-4 col-sm-6">
+                    <div class="team-thumb wow fadeInUp" data-wow-delay="0.2s">
+                         <img src="{{rs.image.url}}" class="img-responsive" alt="">
+ 
+                              <div class="team-info">
+                                   <h3>{{rs.name}}</h3>
+                                   <p>{{rs.category}}</p>
+                                   <p>{{rs.policlinic}}</p>
+                                   <div class="team-contact-info">
+                                        <p><i class="fa fa-phone"></i>{{rs.phone}}</p>
+                                        <p><i class="fa fa-envelope-o"></i> <a href="#">{{rs.email}}</a></p>
+                                   </div>
+                                   <ul class="social-icon">
+                                        <li><a href="https://www.linkedin.com/{{rs.linkedin}}" target="_blank" class="fa fa-linkedin-square" style="color: #0077B5;"></a></li>
+                                        <li><a href="https://www.twitter.com/{{rs.twitter}}" target="_blank" class="fa fa-twitter" style="color: #1da1f2;"></a></li>
+                                   </ul>
+                              </div>
+ 
+                    </div>
+               </div>
+               {% endfor %}
+               
+          </div>
+     </div>
+ </section>
 
 
    <!-- NEWS -->
@@ -138,65 +91,6 @@
    </section>
 
 
-   <!-- MAKE AN APPOINTMENT -->
-   <section id="appointment" data-stellar-background-ratio="3">
-        <div class="container">
-             <div class="row">
-
-                  <div class="col-md-6 col-sm-6">
-                       <img src="{% static 'images/appointment-image.jpg' %}" class="img-responsive" alt="">
-                  </div>
-
-                  <div class="col-md-6 col-sm-6">
-                       <!-- CONTACT FORM HERE -->
-                       <form id="appointment-form" role="form" method="post" action="#">
-
-                            <!-- SECTION TITLE -->
-                            <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
-                                 <h2>Make an appointment</h2>
-                            </div>
-
-                            <div class="wow fadeInUp" data-wow-delay="0.8s">
-                                 <div class="col-md-6 col-sm-6">
-                                      <label for="name">Name</label>
-                                      <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
-                                 </div>
-
-                                 <div class="col-md-6 col-sm-6">
-                                      <label for="email">Email</label>
-                                      <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
-                                 </div>
-
-                                 <div class="col-md-6 col-sm-6">
-                                      <label for="date">Select Date</label>
-                                      <input type="date" name="date" value="" class="form-control">
-                                 </div>
-
-                                 <div class="col-md-6 col-sm-6">
-                                      <label for="select">Select Department</label>
-                                      <select class="form-control">
-                                           <option>General Health</option>
-                                           <option>Cardiology</option>
-                                           <option>Dental</option>
-                                           <option>Medical Research</option>
-                                      </select>
-                                 </div>
-
-                                 <div class="col-md-12 col-sm-12">
-                                      <label for="telephone">Phone Number</label>
-                                      <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
-                                      <label for="Message">Additional Message</label>
-                                      <textarea class="form-control" rows="5" id="message" name="message" placeholder="Message"></textarea>
-                                      <button type="submit" class="form-control" id="cf-submit" name="submit">Submit Button</button>
-                                 </div>
-                            </div>
-                      </form>
-                  </div>
-
-             </div>
-        </div>
-   </section>
-
 
    <!-- GOOGLE MAP -->
    <section id="google-map">
@@ -206,5 +100,5 @@
           3. Click "Share" and choose "Embed map" tab
           4. Copy only URL and paste it within the src="" field below
   -->
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3647.3030413476204!2d100.5641230193719!3d13.757206847615207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf51ce6427b7918fc!2sG+Tower!5e0!3m2!1sen!2sth!4v1510722015945" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d770904.1471160394!2d27.70992279052735!3d40.995836204212395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa4ad4f4032bd%3A0x6815e87293ec71da!2sMedical%20Park%20Bah%C3%A7elievler%20Hastanesi!5e0!3m2!1str!2str!4v1672007111810!5m2!1str!2str" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
    </section>     

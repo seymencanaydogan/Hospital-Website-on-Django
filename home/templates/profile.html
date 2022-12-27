@@ -1,0 +1,42 @@
+{%  extends "homebase.html" %}
+{% block title %} {{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% load static %}
+{% block head %}
+    <link rel="icon" type='image/png' href='{{ setting.icon.url }}'/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profileinfo.css' %}"/>
+{% endblock %}
+
+{% block header %}{% include 'header.html'%}{% endblock %}
+{% block sidebar %}{% include "sidebar.html" %}{% endblock %}
+{% block content %}
+
+<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+    <div class="card p-4"> 
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+            
+            <button class="btn btn-secondary"> <img src={{user.image}} height="100" width="100" /></button> 
+            <span class="name mt-3">{{user.user.first_name}} {{user.user.last_name}}</span> 
+            <span class="idd">@{{user.user.username}}</span> 
+            
+            <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
+                 
+            </div> 
+            <div class="text mt-3"> 
+                <span> <br>Email: {{user.email}}
+                <br> Telefon: {{user.phone}}
+                <br> Adres: {{user.adress}}
+                <br> Şehir: {{user.city}}
+                <br> Ülke: {{user.country}}
+                </span> 
+            </div> 
+            <div class=" px-2 rounded mt-4 date "> 
+                <span class="join">{{user.user.date_joined}} tarihinde katıldı.</span> 
+            </div> 
+        </div> 
+    </div>
+</div>
+
+{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}
